@@ -55,8 +55,9 @@ async def callback_all(client, query: CallbackQuery):
             # print(user)
             if user.status in [ChatMemberStatus.MEMBER, ChatMemberStatus.OWNER,ChatMemberStatus.ADMINISTRATOR] and support.status in [ChatMemberStatus.MEMBER, ChatMemberStatus.OWNER,ChatMemberStatus.ADMINISTRATOR]:
                 
-                add_refer_balance(user_id=referred_by, refer_in=REFER_BONUS)
                 add_default_balance(user_id=user_id)
+                add_refer_balance(user_id=referred_by, refer_in=REFER_BONUS)
+                
                 await client.send_message(user_id, f"Congratulations! You've received {NEW_USER_BONUS}₹ as a new user bonus.")
                 await client.send_message(referred_by, f"Congratulations! You've received {REFER_BONUS}₹ for referring a new user.")
                 await JN.send_message(log_channel, text=f"🦋 #bonus 🦋,\n\n**ID** : {user_id}\n**Name**: {query.from_user.first_name}\n**Referred by**: {referred_by}\n**Bonuses awarded**: {NEW_USER_BONUS}₹ to new user, {REFER_BONUS}₹ to referrer")
