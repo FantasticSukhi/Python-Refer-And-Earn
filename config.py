@@ -12,7 +12,7 @@ NEW_USER_BONUS=int(1)
 
 #username without @
 UPDATE_CHNL:str = os.environ.get("UPDATE_CHNL", "jn_bots")
-SUPPORT_GRP:str = os.environ.get("SUPPORT_GRP", "jn_family")
+SUPPORT_GRP:str = os.environ.get("SUPPORT_GRP", "@Dazai_Giveaway_1")
 
 #get it from @username_to_id_bot this bot 
 
