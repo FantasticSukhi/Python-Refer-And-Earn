@@ -4,7 +4,7 @@ from pymongo import MongoClient
 client = MongoClient(MONGO_DB_URI)
 db = ()
 collection = ()
-files_collection = db["files"]
+
 
 
 # Function to update balance for a user
