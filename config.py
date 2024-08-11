@@ -17,7 +17,7 @@ SUPPORT_GRP:str = os.environ.get("SUPPORT_GRP", "@Dazai_Giveaway_1")
 #get it from @username_to_id_bot this bot 
 
 log_channel = int(os.environ.get("LOG_CHANNEL", "-1001918482012"))
-OWNER_ID=int(os.environ.get("OWNER_ID",5597521952))
+OWNER_ID=int(5597521952)
 
 
 # search on youtube "how to create mongodburl""
