@@ -2,7 +2,7 @@ from .. import JN
 from pyrogram import Client, enums, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton, ReplyKeyboardMarkup
 from ..database import collection
-from config import OWNER_ID as owner_id, main_button
+from config import OWNER_ID as owner_id, main_button,WITHDRAWAL
 import asyncio
 
 def decrease_balance(user_id, amount):
@@ -22,6 +22,9 @@ async def withdrawal(bot, message):
 
     if amount > balance:
         await message.reply_text("Insufficient balance. Please enter a valid amount.", reply_markup=main_button)
+        return
+    if amount < WITHDRAWAL:
+        await message.reply_text(f"Minimum balance require {WITHDRAWAL}INR.", reply_markup=main_button)
         return
 
     msg2 = await JN.ask(message.from_user.id, "Please provide your UPI ID.", reply_markup=main_button)
