@@ -9,6 +9,9 @@ BOT_TOKEN:str = os.environ.get("BOT_TOKEN", "")
 
 REFER_BONUS=int(1)
 NEW_USER_BONUS=int(1)
+#minimum withdrawal amount
+WITHDRAWAL=int(3) 
+
 
 #username without @
 UPDATE_CHNL:str = os.environ.get("UPDATE_CHNL", "jn_bots")
