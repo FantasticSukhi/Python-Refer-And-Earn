@@ -10,7 +10,7 @@ BOT_TOKEN:str = os.environ.get("BOT_TOKEN", "")
 REFER_BONUS=int(1)
 NEW_USER_BONUS=int(1)
 #minimum withdrawal amount
-WITHDRAWAL=int(4) 
+WITHDRAWAL=int(2) 
 
 
 #username without @
