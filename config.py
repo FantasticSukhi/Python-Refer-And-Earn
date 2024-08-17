@@ -27,7 +27,7 @@ OWNER_ID=5597521952
 
 MONGO_DB_URI:str = os.environ.get(
     "MONGO_DB_URI",
-    "mongodb+srv://rajpriti712:NHAvrha6XNd043uI@cluster0.a9pzur5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    "")
 	
 
 
