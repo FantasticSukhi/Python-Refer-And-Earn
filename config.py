@@ -15,7 +15,7 @@ WITHDRAWAL=int(2)
 
 #username without @
 UPDATE_CHNL:str = os.environ.get("UPDATE_CHNL", "jn_bots")
-SUPPORT_GRP:str = os.environ.get("SUPPORT_GRP", "+ZKv322DSDPVlNGQ1")
+SUPPORT_GRP:str = os.environ.get("SUPPORT_GRP", "-1002195994803")
 
 #get it from @username_to_id_bot this bot 
 
