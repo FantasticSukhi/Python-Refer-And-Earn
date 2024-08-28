@@ -22,7 +22,7 @@ async def must_join_channel(bot: Client, msg):
         if user_status.status == "left":
             print("hello")
     except UserNotParticipant:
-        print(hii)
+        print("hii")
     
                 
                 
