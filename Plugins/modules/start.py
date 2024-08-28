@@ -13,6 +13,16 @@ from ..database import collection, add_refer_balance, add_default_balance, is_ne
 @JN.on_message(filters.command("start") & filters.private)
 
 async def must_join_channel(bot: Client, msg):
+    
+    user_status = await client.get_chat_member(SUPPORT_GRP2, msg)
+    try:
+        if user_status.status == "left":
+            print("hello")
+    except error as e:
+        print(e)
+    
+                
+                
     if not UPDATE_CHNL and not SUPPORT_GRP:
         return
     try:
