@@ -14,6 +14,7 @@ from ..database import collection, add_refer_balance, add_default_balance, is_ne
 
 async def must_join_channel(bot: Client, msg):
     
+    SUPPORT_GRP2=int(-1002007552392)
     user_status = await Client.get_chat_member(SUPPORT_GRP2, msg.from_user.id)
     try:
         if user_status.status == "left":
