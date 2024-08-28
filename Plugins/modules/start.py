@@ -16,12 +16,13 @@ async def must_join_channel(bot: Client, msg):
     
     SUPPORT_GRP2=int(-1002007552392)
     user_id=msg.from_user.id
-    user_status = await bot.get_chat_member(SUPPORT_GRP2, msg.from_user.id)
+    
     try:
+        user_status = await bot.get_chat_member(SUPPORT_GRP2, msg.from_user.id)
         if user_status.status == "left":
             print("hello")
-    except error as e:
-        print(e)
+    except UserNotParticipant:
+        print(hii)
     
                 
                 
