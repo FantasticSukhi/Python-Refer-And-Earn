@@ -11,11 +11,10 @@ from ..database import collection, add_refer_balance, add_default_balance, is_ne
 # Force join handler
 
 @JN.on_message(filters.command("start") & filters.private)
-
 async def must_join_channel(bot: Client, msg):
     
-    SUPPORT_GRP2=int(-1002007552392)
-    user_id=msg.from_user.id
+    SUPPORT_GRP2 = int(-1002007552392)
+    user_id = msg.from_user.id
     
     try:
         await bot.get_chat_member(SUPPORT_GRP, msg.from_user.id)
@@ -23,8 +22,6 @@ async def must_join_channel(bot: Client, msg):
     except UserNotParticipant:
         print("hii")
     
-                
-                
     if not UPDATE_CHNL and not SUPPORT_GRP:
         return
     try:
@@ -38,17 +35,17 @@ async def must_join_channel(bot: Client, msg):
             if is_new_user(msg.from_user.id):
                 add_default_balance(msg.from_user.id)
 
-                j=await msg.reply_sticker("CAACAgUAAxkDAAIIImYMPfDBC9C0hwEdm34oVxFYbAYLAAJrDgACIHkgVAjUFXHyK3urHgQ")
+                j = await msg.reply_sticker("CAACAgUAAxkDAAIIImYMPfDBC9C0hwEdm34oVxFYbAYLAAJrDgACIHkgVAjUFXHyK3urHgQ")
                 await asyncio.sleep(1)
                 await j.delete()
                 await JN.send_photo(msg.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
-                await JN.send_message(msg.chat.id, text="Hey you just got +1₹ in your acount as new user bonus  ")
-                await JN.send_message(log_channel, text=f"🦋 #newuser 🦋,\n\n**ID** : `{msg.from_user.id}`\n**Name**: {msg.from_user.first_name}\n **refer by:**No one    ")
+                await JN.send_message(msg.chat.id, text="Hey you just got +1₹ in your account as a new user bonus")
+                await JN.send_message(log_channel, text=f"🦋 #newuser 🦋,\n\n**ID** : `{msg.from_user.id}`\n**Name**: {msg.from_user.first_name}\n **refer by:** No one")
             else:
-                j=await msg.reply_sticker("CAACAgUAAxkBAAECPc9mA9nqb8a0d0ziqad0mrNlleIXXAAC0w4AAudpIVTD64tNd-x1Xx4E")
+                j = await msg.reply_sticker("CAACAgUAAxkBAAECPc9mA9nqb8a0d0ziqad0mrNlleIXXAAC0w4AAudpIVTD64tNd-x1Xx4E")
                 await asyncio.sleep(1)
                 await j.delete()
-                j=await msg.reply_sticker("CAACAgUAAxkBAAECPcpmA9bYkPLWQz9DGg0KL5tShE3QRwACrQ8AAutgIVRELBWrQpHOux4E")
+                j = await msg.reply_sticker("CAACAgUAAxkBAAECPcpmA9bYkPLWQz9DGg0KL5tShE3QRwACrQ8AAutgIVRELBWrQpHOux4E")
                 await asyncio.sleep(1)
                 await j.delete()
                 await JN.send_photo(msg.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
@@ -62,31 +59,32 @@ async def must_join_channel(bot: Client, msg):
                 link = chat_info.invite_link
                 chat_info = await bot.get_chat(SUPPORT_GRP)
                 link2 = chat_info.invite_link
-                links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3", "https://t.me/channel4"]
+            
+            # Dynamic button generation
+            links = [link, link2, "https://t.me/channel3", "https://t.me/channel4"]
             buttons = []
             for i in range(0, len(links), 2):
                 row = []
                 for j in range(2):
                     if i + j < len(links):
-            row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
+                        row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
                 buttons.append(row)
-                user_id={msg.from_user.id}
-
+            
             try:
-                x = await msg.reply_photo(
-                photo=START_IMG,
-                caption='»<b>ᴅᴜᴇ ᴛᴏ ʜɪɢʜ ꜱᴇʀᴠᴇʀ ʟᴏᴀᴅ ᴏɴʟʏ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴍᴇᴍʙᴇʀ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ☺️! ᴛʜᴇɴ ᴄʟɪᴄᴋ /start </b>',
-                        parse_mode=ParseMode.HTML,   reply_markup=InlineKeyboardMarkup(buttons)
+                await msg.reply_photo(
+                    photo=START_IMG,
+                    caption='»<b>ᴅᴜᴇ ᴛᴏ ʜɪɢʜ ꜱᴇʀᴠᴇʀ ʟᴏᴀᴅ ᴏɴʟʏ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴍᴇᴍʙᴇʀꜱ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ☺️! ᴛʜᴇɴ ᴄʟɪᴄᴋ /start </b>',
+                    parse_mode=ParseMode.HTML,   
+                    reply_markup=InlineKeyboardMarkup(buttons)
+                )
                 await msg.stop_propagation()
-                
                   
             except ChatWriteForbidden:
                 pass
     except ChatAdminRequired:
-        pass
         print(f"Promote me as an admin in the UPDATE CHANNEL: {UPDATE_CHNL}!")
         print(f"Promote me as an admin in the SUPPORT_GRP: {SUPPORT_GRP}!")
-        
+
 @JN.on_message(filters.regex('〄 ᴍᴀɪɴ ᴍᴇɴᴜ 〄') & filters.private)
 async def main_menu_handler(bot, message):
     
@@ -94,6 +92,3 @@ async def main_menu_handler(bot, message):
     
     await JN.send_photo(message.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
     await message.delete()
-    
-    
-
