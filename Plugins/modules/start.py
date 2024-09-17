@@ -62,21 +62,21 @@ async def must_join_channel(bot: Client, msg):
                 link = chat_info.invite_link
                 chat_info = await bot.get_chat(SUPPORT_GRP)
                 link2 = chat_info.invite_link
+                links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3", "https://t.me/channel4"]
+            buttons = []
+            for i in range(0, len(links), 2):
+                row = []
+                for j in range(2):
+                    if i + j < len(links):
+            row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
+                buttons.append(row)
                 user_id={msg.from_user.id}
 
             try:
                 x = await msg.reply_photo(
                 photo=START_IMG,
                 caption='»<b>ᴅᴜᴇ ᴛᴏ ʜɪɢʜ ꜱᴇʀᴠᴇʀ ʟᴏᴀᴅ ᴏɴʟʏ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴍᴇᴍʙᴇʀ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ☺️! ᴛʜᴇɴ ᴄʟɪᴄᴋ /start </b>',
-                        parse_mode=ParseMode.HTML,
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                [
-                                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=link),
-                                    InlineKeyboardButton("ᴄᴏʟʟᴀʙ ᴄʜᴀɴɴᴇʟ ", url=link2)]
-                            ]
-                        )
-                    )
+                        parse_mode=ParseMode.HTML,   reply_markup=InlineKeyboardMarkup(buttons)
                 await msg.stop_propagation()
                 
                   
