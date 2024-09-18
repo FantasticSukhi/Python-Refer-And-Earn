@@ -17,6 +17,21 @@ links = [
     "https://t.me/channel6"
 ]
 
+
+@JN.on_message(filters.regex("❤️‍🔥 ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ") |filters.command("refer"))
+async def get_referral_link(client, message):
+    document = collection.find_one({"user_id": message.from_user.id})
+    user_id = message.from_user.id
+    total=document.get("total_refer")
+    referral_link = f"ɴᴀᴍᴇ : {message.from_user.mention}\ntotal refer : {total}\n\nʏᴏᴜʀ ʀᴇꜰᴇʀ ʟɪɴᴋ: https://t.me/{JN.username}?start={user_id}"
+    referral_link2 = f"https://telegram.me/share/url?url=t.me/{JN.username}?start={user_id}"
+    await message.reply(f"{referral_link}",reply_markup=InlineKeyboardMarkup([
+        [InlineKeyboardButton("share url ",url=referral_link2)] 
+        ]),disable_web_page_preview=True)
+        
+        
+
+
 @JN.on_message(filters.regex(r"/start \d+"))
 async def must_join_channel(bot: Client, msg):
     referred_by = int(msg.text.split()[1])
