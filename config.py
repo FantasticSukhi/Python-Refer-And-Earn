@@ -30,8 +30,6 @@ MONGO_DB_URI:str = os.environ.get(
     "")
 	
 
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-
 # The link variable should contain all the channel URLs in a list format
 links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3"]
 
