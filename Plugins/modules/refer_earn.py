@@ -15,7 +15,7 @@ links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel
 
 
 buttons = []
-
+joined_button = InlineKeyboardButton("Joined", callback_data=f"joined_{user_id}_{referred_by}")
 for i in range(0, len(links), 2):
     row = []
     for j in range(2):
