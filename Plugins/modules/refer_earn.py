@@ -3,7 +3,7 @@ import asyncio
 from .. import JN
 from pyrogram.enums import ParseMode
 from pyrogram.errors import UserNotParticipant, ChatWriteForbidden, ChatAdminRequired
-from config import UPDATE_CHNL, SUPPORT_GRP as Update2, START_IMG, all_platform,NEW_USER_BONUS,REFER_BONUS,main_button,log_channel
+from config import *
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..database import collection, add_refer_balance, add_default_balance, is_new_user
 
@@ -51,7 +51,7 @@ async def get_referral_link(client, message):
 # Force join handler
 @JN.on_message(filters.regex(r"/start \d+"))
 async def must_join_channel(bot: Client, msg):
-    # if not UPDATE_CHNL and not Update2:
+    # if not UPDATE_CHNL and not SUPPORT_GRP:
     #     return
     referred_by = int(msg.text.split()[1])
     user_id = msg.from_user.id
@@ -59,7 +59,7 @@ async def must_join_channel(bot: Client, msg):
     try:
         try:
             await bot.get_chat_member(UPDATE_CHNL, msg.from_user.id)
-            await bot.get_chat_member(Update2, msg.from_user.id)
+            await bot.get_chat_member(SUPPORT_GRP, msg.from_user.id)
             
             caption2 = f"Hello {msg.from_user.first_name}, \nI'm {JN.mention}\n\nI'm a powerful SMM bot. You can buy any type of SMM service here.\n\nMaintained by: <a href='https://t.me/jn_dev/'>JN Dev</a>"
             referred_by = int(msg.text.split()[1])
@@ -85,7 +85,7 @@ async def must_join_channel(bot: Client, msg):
         
         except UserNotParticipant:
             link = "https://t.me/" + UPDATE_CHNL
-            link2 = "https://t.me/" + Update2
+            link2 = "https://t.me/" + SUPPORT_GRP
             user_id={msg.from_user.id}
 
             try:
@@ -110,5 +110,5 @@ async def must_join_channel(bot: Client, msg):
     except ChatWriteForbidden:
         # print(e)
         print(f"Promote me as an admin in the UPDATE CHANNEL: {UPDATE_CHNL}!")
-        print(f"Promote me as an admin in the Update2: {Update2}!")
+        print(f"Promote me as an admin in the SUPPORT_GRP: {SUPPORT_GRP}!")
         pass
