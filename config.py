@@ -37,18 +37,6 @@ links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel
 
 
 
-# Create a list to hold all the buttons
-buttons = []
-
-
-for i in range(0, len(links), 2):
-    row = []
-    for j in range(2):
-        if i + j < len(links):
-            row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
-    buttons.append(row)
-
-
 
 
 
