@@ -51,24 +51,10 @@ async def must_join_channel(bot: Client, msg):
                 await JN.send_photo(msg.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
                 
         except UserNotParticipant:
-            if UPDATE_CHNL.isalpha() and SUPPORT_GRP.isalpha():
-                link = "https://t.me/" + UPDATE_CHNL
-                link2 = "https://t.me/" + SUPPORT_GRP
-            else:
-                chat_info = await bot.get_chat(UPDATE_CHNL)
-                link = chat_info.invite_link
-                chat_info = await bot.get_chat(SUPPORT_GRP)
-                link2 = chat_info.invite_link
+            
             
             # Dynamic button generation
-            links = [link, link2, "https://t.me/channel3", "https://t.me/channel4"]
-            buttons = []
-            for i in range(0, len(links), 2):
-                row = []
-                for j in range(2):
-                    if i + j < len(links):
-                        row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
-                buttons.append(row)
+            
             
             try:
                 await msg.reply_photo(
