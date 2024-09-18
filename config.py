@@ -30,8 +30,12 @@ MONGO_DB_URI:str = os.environ.get(
     "")
 	
 
-# The link variable should contain all the channel URLs in a list format
+# all channels list you can add more 
 links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3"]
+
+
+
+
 
 # Create a list to hold all the buttons
 buttons = []
