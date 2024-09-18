@@ -13,7 +13,6 @@ from ..database import collection, add_refer_balance, add_default_balance, is_ne
 @JN.on_message(filters.command("start") & filters.private)
 async def must_join_channel(bot: Client, msg):
     
-    
     if not UPDATE_CHNL and not SUPPORT_GRP:
         return
     try:
@@ -43,10 +42,25 @@ async def must_join_channel(bot: Client, msg):
                 await JN.send_photo(msg.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
                 
         except UserNotParticipant:
+            # Generate dynamic buttons for channels
+            links = [
+                "https://t.me/channel1",  # Add actual links here
+                "https://t.me/channel2",
+                # Add more channel links as needed
+            ]
+            buttons = []
+            
+            # Adding rows of two buttons
+            for i in range(0, len(links), 2):
+                row = []
+                for j in range(2):
+                    if i + j < len(links):
+                        row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
+                buttons.append(row)
 
             # Adding the 'Joined' button dynamically with bot's start link
             bot_username = (await bot.get_me()).username
-            start_link = f"https://t.me/{bot_username}?start={msg.from_user.id}"
+            start_link = f"https://t.me/{bot_username}?start"
             buttons.append([InlineKeyboardButton("Joined", url=start_link)])
 
             try:
