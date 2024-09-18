@@ -8,14 +8,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..database import collection, add_refer_balance, add_default_balance, is_new_user
 
 # Define the links for the channels
-links = [
-    "https://t.me/jn_bots", 
-    "https://t.me/jn_family", 
-    "https://t.me/channel3", 
-    "https://t.me/channel4",
-    "https://t.me/channel5", 
-    "https://t.me/channel6"
-]
+
 
 
 @JN.on_message(filters.regex("❤️‍🔥 ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ") |filters.command("refer"))
