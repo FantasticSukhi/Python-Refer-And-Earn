@@ -13,14 +13,6 @@ from ..database import collection, add_refer_balance, add_default_balance, is_ne
 @JN.on_message(filters.command("start") & filters.private)
 async def must_join_channel(bot: Client, msg):
     
-    SUPPORT_GRP2 = int(-1002007552392)
-    user_id = msg.from_user.id
-    
-    try:
-        await bot.get_chat_member(SUPPORT_GRP, msg.from_user.id)
-        print("hello")
-    except UserNotParticipant:
-        print("hii")
     
     if not UPDATE_CHNL and not SUPPORT_GRP:
         return
@@ -51,11 +43,12 @@ async def must_join_channel(bot: Client, msg):
                 await JN.send_photo(msg.chat.id, photo=start_img2, caption=caption, reply_markup=main_button)
                 
         except UserNotParticipant:
-            
-            
-            # Dynamic button generation
-            
-            
+
+            # Adding the 'Joined' button dynamically with bot's start link
+            bot_username = (await bot.get_me()).username
+            start_link = f"https://t.me/{bot_username}?start={msg.from_user.id}"
+            buttons.append([InlineKeyboardButton("Joined", url=start_link)])
+
             try:
                 await msg.reply_photo(
                     photo=START_IMG,
