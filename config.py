@@ -30,6 +30,30 @@ MONGO_DB_URI:str = os.environ.get(
     "")
 	
 
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+
+# The link variable should contain all the channel URLs in a list format
+links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3"]
+
+# Create a list to hold all the buttons
+buttons = []
+
+
+for i in range(0, len(links), 2):
+    row = []
+    for j in range(2):
+        if i + j < len(links):
+            row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
+    buttons.append(row)
+
+
+
+
+
+
+
+
+
 
 INR_IMG="https://graph.org/file/591e034f3ebaca25e0692.jpg"
 START_IMG= "https://graph.org/file/877838e68ea8e3099f343.jpg"
@@ -59,4 +83,8 @@ all_platform = ReplyKeyboardMarkup(
         ],
         resize_keyboard=True
     )
+    
+    
+    
+    
 
