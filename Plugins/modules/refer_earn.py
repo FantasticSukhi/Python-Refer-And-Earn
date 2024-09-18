@@ -8,6 +8,35 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..database import collection, add_refer_balance, add_default_balance, is_new_user
 
 
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+# The link variable should contain all the channel URLs in a list format
+links = ["https://t.me/jn_bots", "https://t.me/jn_family", "https://t.me/channel3", "https://t.me/channel4"]
+
+
+buttons = []
+
+for i in range(0, len(links), 2):
+    row = []
+    for j in range(2):
+        if i + j < len(links):
+            row.append(InlineKeyboardButton(f"Channel {i+j+1}", url=links[i + j]))
+    buttons.append(row)
+
+if len(links) == 2:
+    
+    buttons.append([joined_button])  
+elif len(links) == 4:
+    if len(buttons[-1]) == 1:
+        buttons[-1].append(joined_button)  
+        
+    else:
+        buttons.append([joined_button])  
+        
+reply_markup1 = InlineKeyboardMarkup(buttons)
+
+
+
 @JN.on_message(filters.regex("❤️‍🔥 ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ") |filters.command("refer"))
 async def get_referral_link(client, message):
     document = collection.find_one({"user_id": message.from_user.id})
@@ -35,6 +64,7 @@ async def must_join_channel(bot: Client, msg):
             caption2 = f"Hello {msg.from_user.first_name}, \nI'm {JN.mention}\n\nI'm a powerful SMM bot. You can buy any type of SMM service here.\n\nMaintained by: <a href='https://t.me/jn_dev/'>JN Dev</a>"
             referred_by = int(msg.text.split()[1])
             user_id = msg.from_user.id
+            joined_button = InlineKeyboardButton("Joined", callback_data=f"joined_{user_id}_{referred_by}")
             document = collection.find_one({"user_id": user_id})
 
             if is_new_user(msg.from_user.id):
@@ -67,14 +97,7 @@ async def must_join_channel(bot: Client, msg):
                         photo=START_IMG,
                         caption='»<b>ᴅᴜᴇ ᴛᴏ ʜɪɢʜ ꜱᴇʀᴠᴇʀ ʟᴏᴀᴅ ᴏɴʟʏ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴍᴇᴍʙᴇʀ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ☺️!</b>',
                         parse_mode=ParseMode.HTML,
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                [
-                                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=link),
-                                    InlineKeyboardButton("ᴄᴏʟʟᴀʙ ᴄʜᴀɴɴᴇʟ ", url=link2)],
-                                    [InlineKeyboardButton("Joined", callback_data=f"joined_{user_id}_{referred_by}")]
-                            ]
-                        )
+                        reply_markup=reply_markup1
                     )
                     
                     await JN.send_message(referred_by, f"ʜᴇʏ ʏᴏᴜʀ ꜰʀɪᴇɴᴅ ɪꜱ ꜱᴛᴀʀᴛᴇᴅ ʙᴏᴛ ᴡʜᴇɴ ʜᴇ ᴡɪʟʟ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ʏᴏᴜ ᴡɪʟʟ ɢᴇᴛ ʏᴏᴜʀ ʙᴏɴᴜꜱ.")
