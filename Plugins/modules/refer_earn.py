@@ -76,9 +76,6 @@ async def must_join_channel(bot: Client, msg):
                 await bot.send_message(referred_by, "Your friend is already a user of the bot.")
         
         except UserNotParticipant:
-            # Force the user to join the required channels
-            link = "https://t.me/" + UPDATE_CHNL
-            link2 = "https://t.me/" + SUPPORT_GRP
 
             if is_new_user(msg.from_user.id):
                 await msg.reply_photo(
