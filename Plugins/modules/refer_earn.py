@@ -56,6 +56,7 @@ async def must_join_channel(bot: Client, msg):
     referred_by = int(msg.text.split()[1])
     user_id = msg.from_user.id
     print(referred_by)
+    joined_button = InlineKeyboardButton("Joined", callback_data=f"joined_{user_id}_{referred_by}")
     try:
         try:
             await bot.get_chat_member(UPDATE_CHNL, msg.from_user.id)
@@ -64,7 +65,7 @@ async def must_join_channel(bot: Client, msg):
             caption2 = f"Hello {msg.from_user.first_name}, \nI'm {JN.mention}\n\nI'm a powerful SMM bot. You can buy any type of SMM service here.\n\nMaintained by: <a href='https://t.me/jn_dev/'>JN Dev</a>"
             referred_by = int(msg.text.split()[1])
             user_id = msg.from_user.id
-            joined_button = InlineKeyboardButton("Joined", callback_data=f"joined_{user_id}_{referred_by}")
+            
             document = collection.find_one({"user_id": user_id})
 
             if is_new_user(msg.from_user.id):
