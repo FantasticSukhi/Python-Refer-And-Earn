@@ -83,14 +83,13 @@ async def main_menu_handler(bot, message):
     await message.delete()
     
     
-    
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 
 @JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(JN, message):
     file = getattr(message, message.media.value)
     filename = file.file_name  
-    if file.file_size > 2000 * 1024 * 1024:
-         return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ. ᴄᴏɴᴛᴀᴄᴛ ʙᴏᴛ <a href=https://t.me/Narayan_k_purohit>NARAYAN</a> 💞")
         
     try:
         await message.reply_text(
