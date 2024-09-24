@@ -88,6 +88,7 @@ from hachoir.parser import createParser
 
 @JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(JN, message):
+    print("hui")
     file = getattr(message, message.media.value)
     filename = file.file_name  
         
@@ -105,7 +106,6 @@ async def rename_start(JN, message):
 	    reply_to_message_id=message.id,  
 	    reply_markup=ForceReply(True)
         )
-    except:
-        pass
+    
         
         
