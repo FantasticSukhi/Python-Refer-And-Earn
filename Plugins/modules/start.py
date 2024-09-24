@@ -2,7 +2,7 @@ from pyrogram import filters, Client
 import asyncio
 from .. import JN
 from pyrogram.enums import ParseMode
-from pyrogram.errors import UserNotParticipant, ChatWriteForbidden, ChatAdminRequired
+from pyrogram.errors import UserNotParticipant, ChatWriteForbidden, ChatAdminRequired,FloodWait
 from config import *
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..database import collection, add_refer_balance, add_default_balance, is_new_user
@@ -91,4 +91,22 @@ async def rename_start(JN, message):
     filename = file.file_name  
     if file.file_size > 2000 * 1024 * 1024:
          return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ. ᴄᴏɴᴛᴀᴄᴛ ʙᴏᴛ <a href=https://t.me/Narayan_k_purohit>NARAYAN</a> 💞")
+        
+        try:
+        await message.reply_text(
+            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+	    reply_to_message_id=message.id,  
+	    reply_markup=ForceReply(True)
+        )       
+        await sleep(30)
+    except FloodWait as e:
+        await sleep(e.value)
+        await message.reply_text(
+            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+	    reply_to_message_id=message.id,  
+	    reply_markup=ForceReply(True)
+        )
+    except:
+        pass
+        
         
