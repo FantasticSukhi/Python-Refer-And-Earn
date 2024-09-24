@@ -92,21 +92,21 @@ async def rename_start(JN, message):
     if file.file_size > 2000 * 1024 * 1024:
          return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ. ᴄᴏɴᴛᴀᴄᴛ ʙᴏᴛ <a href=https://t.me/Narayan_k_purohit>NARAYAN</a> 💞")
         
-        try:
-            await message.reply_text(
+    try:
+        await message.reply_text(
             text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
 	    reply_to_message_id=message.id,  
 	    reply_markup=ForceReply(True)
         )       
-            await sleep(30)
-        except FloodWait as e:
-            await sleep(e.value)
-            await message.reply_text(
+        await sleep(30)
+    except FloodWait as e:
+        await sleep(e.value)
+        await message.reply_text(
             text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
 	    reply_to_message_id=message.id,  
 	    reply_markup=ForceReply(True)
         )
-        except:
-            pass
+    except:
+        pass
         
         
