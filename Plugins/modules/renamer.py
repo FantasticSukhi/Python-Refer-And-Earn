@@ -94,14 +94,16 @@ from hachoir.parser import createParser
 from asyncio import sleep
 from PIL import Image
 import os, time
+from datetime import datetime
+from pytz import timezone
 
 
 @JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(JN, message):
     file = getattr(message, message.media.value)
-    filename = file.file_name  
+    filename = file.file_name
     if file.file_size > 2000 * 1024 * 1024:
-         return await message.reply_text("Sorry, this bot doesn't support files larger than 2GB.")
+        return await message.reply_text("Sorry, this bot doesn't support files larger than 2GB.")
 
     # Ask for new filename
     try:
@@ -121,7 +123,7 @@ async def rename_start(JN, message):
 async def refunc(client, message):
     reply_message = message.reply_to_message
     if reply_message.reply_markup and isinstance(reply_message.reply_markup, ForceReply):
-        new_name = message.text  # Use the name provided by the user without modification
+        new_name = message.text
         await message.delete()  # Delete the name message to keep the chat clean
         msg = await client.get_messages(message.chat.id, reply_message.id)
         file = msg.reply_to_message
@@ -141,16 +143,23 @@ async def refunc(client, message):
 async def handle_thumbnail(client, message):
     reply_message = message.reply_to_message
     if reply_message.reply_markup and isinstance(reply_message.reply_markup, ForceReply):
-        if message.text.lower() == 'skip':
+        # Check if the user wants to skip sending the thumbnail
+        if message.text and message.text.lower() == 'skip':
             thumbnail = None
-        else:
+        elif message.photo:  # If a photo (thumbnail) is sent
             thumbnail = await client.download_media(message)
+        else:
+            return await message.reply_text(
+                "Please upload a valid thumbnail or send 'skip' to proceed without one.",
+                reply_to_message_id=message.id,
+                reply_markup=ForceReply(True)
+            )
 
         # Retrieve previous messages for filename and media
         msg = await client.get_messages(message.chat.id, reply_message.id)
         file = msg.reply_to_message
         media = getattr(file, file.media.value)
-        new_name = reply_message.text.split(":-")[1]
+        new_name = reply_message.text  # Use the provided filename
 
         # Download the file and prepare for upload
         file_path = f"downloads/{new_name}"
@@ -174,6 +183,7 @@ async def handle_thumbnail(client, message):
         except Exception as e:
             await ms.edit(f"Upload error: {e}")
         finally:
+            # Clean up the downloaded files
             os.remove(file_path)
             if thumbnail:
                 os.remove(thumbnail)
