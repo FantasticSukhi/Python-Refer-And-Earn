@@ -23,7 +23,7 @@ async def rename_start(JN, message):
         
         msg1 = await JN.ask(message.from_user.id, f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`")
         new_name = msg1.text 
-        msg = await JN.get_messages(message.chat.id, reply_message.id)
+        msg = from_user.id
         file = msg.reply_to_message
         media = getattr(file, file.media.value)
         if not "." in new_name:
