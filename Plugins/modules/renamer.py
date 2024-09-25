@@ -146,14 +146,9 @@ async def handle_thumbnail(client, message):
         # Check if the user wants to skip sending the thumbnail
         if message.text and message.text.lower() == 'skip':
             thumbnail = None
-        elif message.photo:  # If a photo (thumbnail) is sent
+        else message.photo:  # If a photo (thumbnail) is sent
             thumbnail = await client.download_media(message)
-        else:
-            return await message.reply_text(
-                "Please upload a valid thumbnail or send 'skip' to proceed without one.",
-                reply_to_message_id=message.id,
-                reply_markup=ForceReply(True)
-            )
+
 
         # Retrieve previous messages for filename and media
         msg = await client.get_messages(message.chat.id, reply_message.id)
