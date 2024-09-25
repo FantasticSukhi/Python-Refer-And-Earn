@@ -121,16 +121,11 @@ async def rename_start(JN, message):
 async def refunc(client, message):
     reply_message = message.reply_to_message
     if reply_message.reply_markup and isinstance(reply_message.reply_markup, ForceReply):
-        new_name = message.text
+        new_name = message.text  # Use the name provided by the user without modification
         await message.delete()  # Delete the name message to keep the chat clean
         msg = await client.get_messages(message.chat.id, reply_message.id)
         file = msg.reply_to_message
         media = getattr(file, file.media.value)
-
-        # Ensure new_name has a file extension
-        if not "." in new_name:
-            extn = media.file_name.rsplit('.', 1)[-1] if "." in media.file_name else "mkv"
-            new_name = f"{new_name}.{extn}"
 
         await reply_message.delete()
 
