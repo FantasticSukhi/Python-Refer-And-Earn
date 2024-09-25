@@ -7,8 +7,61 @@ from config import *
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ..database import collection, add_refer_balance, add_default_balance, is_new_user
 
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
+from asyncio import sleep
 
-# Force join handler
+
+
+@JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
+async def rename_start(JN, message):
+    print("hui")
+    file = getattr(message, message.media.value)
+    filename = file.file_name  
+        
+    try:
+        await message.reply_text(
+            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+	    reply_to_message_id=message.id
+        )       
+        await sleep(30)
+    except FloodWait as e:
+        await sleep(e.value)
+        await message.reply_text(
+            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+	    reply_to_message_id=message.id
+        )
+    
+        
+@JN.on_message(filters.private & filters.reply)
+async def refunc(JN, message):
+    reply_message = message.reply_to_message
+    if (reply_message.reply_markup) and isinstance(reply_message.reply_markup, ForceReply):
+        new_name = message.text 
+        await message.delete() 
+        msg = await JN.get_messages(message.chat.id, reply_message.id)
+        file = msg.reply_to_message
+        media = getattr(file, file.media.value)
+        if not "." in new_name:
+            if "." in media.file_name:
+                extn = media.file_name.rsplit('.', 1)[-1]
+            else:
+                extn = "mkv"
+            new_name = new_name + "." + extn
+        await message.reply(
+            text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**`{new_name}`",
+            reply_to_message_id=file.id
+        )
+    
+
+
+
+
+
+
+
+
+
 
 @JN.on_message(filters.command("start") & filters.private)
 
@@ -83,27 +136,3 @@ async def main_menu_handler(bot, message):
     await message.delete()
     
     
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-
-@JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
-async def rename_start(JN, message):
-    print("hui")
-    file = getattr(message, message.media.value)
-    filename = file.file_name  
-        
-    try:
-        await message.reply_text(
-            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
-	    reply_to_message_id=message.id
-        )       
-        await sleep(30)
-    except FloodWait as e:
-        await sleep(e.value)
-        await message.reply_text(
-            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
-	    reply_to_message_id=message.id
-        )
-    
-        
-        
