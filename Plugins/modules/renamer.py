@@ -70,12 +70,12 @@ def convert(seconds):
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 async def send_log(b, u):
-    if Config.LOG_CHANNEL is not None:
+    if log_channel is not None:
         curr = datetime.now(timezone("Asia/Kolkata"))
         date = curr.strftime('%d %B, %Y')
         time = curr.strftime('%I:%M:%S %p')
         await b.send_message(
-            Config.LOG_CHANNEL,
+            log_channel,
             f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
         )
         
@@ -85,8 +85,8 @@ async def send_log(b, u):
 
 
 
-@Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
-async def rename_start(client, message):
+@JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
+async def rename_start(JN, message):
     file = getattr(message, message.media.value)
     filename = file.file_name  
     if file.file_size > 2000 * 1024 * 1024:
@@ -106,7 +106,7 @@ async def rename_start(client, message):
         pass
 
 
-@Client.on_message(filters.private & filters.reply)
+@JN.on_message(filters.private & filters.reply)
 async def refunc(client, message):
     reply_message = message.reply_to_message
     if reply_message.reply_markup and isinstance(reply_message.reply_markup, ForceReply):
@@ -131,7 +131,7 @@ async def refunc(client, message):
         )
 
 
-@Client.on_message(filters.private & filters.reply)
+@JN.on_message(filters.private & filters.reply)
 async def handle_thumbnail(client, message):
     reply_message = message.reply_to_message
     if reply_message.reply_markup and isinstance(reply_message.reply_markup, ForceReply):
