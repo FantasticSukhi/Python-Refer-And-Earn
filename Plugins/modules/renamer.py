@@ -83,7 +83,17 @@ async def send_log(b, u):
 
 
 
+from pyrogram import Client, filters
+from pyrogram.enums import MessageMediaType
+from pyrogram.errors import FloodWait
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
+
+from asyncio import sleep
+from PIL import Image
+import os, time
 
 
 @JN.on_message(filters.private & (filters.document | filters.audio | filters.video))
