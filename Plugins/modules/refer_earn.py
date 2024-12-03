@@ -58,7 +58,7 @@ async def must_join_channel(bot: Client, msg):
             await bot.get_chat_member(SUPPORT_GRP, msg.from_user.id)
 
             # Send welcome message with the generated buttons
-            caption2 = f"Hello {msg.from_user.first_name}, \nI'm {JN.mention}\n\nI'm a powerful SMM bot. You can buy any type of SMM service here.\n\nMaintained by: <a href='https://t.me/jn_dev/'>JN Dev</a>"
+            caption2 = f"Hello {msg.from_user.first_name}, \nI'm {JN.mention}\n\nI'm a powerful SMM bot. You can buy any type of SMM service here.\n\nMaintained by: <a href='https://t.me/MBV_NETWORK'>MBV</a>"
 
             # Check if the user is new
             if is_new_user(msg.from_user.id):
