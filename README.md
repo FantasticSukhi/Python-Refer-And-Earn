@@ -61,15 +61,15 @@ Press `Ctrl+C` when you're done with editing config and `:wq` to save the config
 Press `Ctrl+b` and then `d`
 
 
-`sudo apt-get update && sudo apt-get upgrade -y`
-`sudo apt-get install python3-pip -y`
-`sudo pip3 install -U pip`
-`git clone https://github.com/FantasticSukhi/Python-Refer-And-Earn && cd Python-Refer-And-Earn`
-`pip3 install --upgrade pip setuptools`
-`pip3 install -U -r requirements.txt`
-`vi Plugins/config.py`
-`sudo apt install tmux && tmux`
-`python3 -m Plugins`
+-`sudo apt-get update && sudo apt-get upgrade -y`
+-`sudo apt-get install python3-pip -y`
+-`sudo pip3 install -U pip`
+-`git clone https://github.com/FantasticSukhi/Python-Refer-And-Earn && cd Python-Refer-And-Earn`
+-`pip3 install --upgrade pip setuptools`
+-`pip3 install -U -r requirements.txt`
+-`vi Plugins/config.py`
+-`sudo apt install tmux && tmux`
+-`python3 -m Plugins`
 
 ━━━━━━━━━━━━━━━━━━━━
 
