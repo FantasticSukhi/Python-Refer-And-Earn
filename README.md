@@ -31,7 +31,7 @@
 - <b> ᴠᴘs/ʟᴏᴄᴀʟ ᴅᴇᴘʟᴏʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅ </b>
 </h3>
 
-- Get your [Necessary Variables](https://github.com/Jnbots/Python-Refer-And-Earn/config.py)
+- Get your [Necessary Variables](https://github.com/FantasticSukhi/Python-Refer-And-Earn/config.py)
 - Upgrade and Update by :
   `sudo apt-get update && sudo apt-get upgrade -y`
 - Install required packages by :
@@ -39,7 +39,7 @@
 - Install pip by :
   `sudo pip3 install -U pip`
 - Clone the repository by :
-  `git clone https://github.com/Jnbots/Python-Refer-And-Earn && cd Python-Refer-And-Earn`
+  `git clone https://github.com/FantasticSukhi/Python-Refer-And-Earn && cd Python-Refer-And-Earn`
 - Install/Upgrade setuptools by :
   `pip3 install --upgrade pip setuptools`
 - Install requirements by :
